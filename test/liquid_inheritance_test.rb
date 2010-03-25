@@ -170,4 +170,10 @@ class LiquidInheritanceTest < Test::Unit::TestCase
       assert_contains(res, /rarrgh/)
     end
   end
+
+  should "fail with message when token has invalid tag structure" do
+    assert_raise(Liquid::SyntaxError, "Tag '{% foo' was not properly terminated with regexp: %}") do
+      LiquidInheritance::Extends.new("extends", "'horace'", ["{% foo"])
+    end
+  end
 end
